@@ -3,8 +3,8 @@ import json
 
 class FCall:
     tools = []
-
     
+    # Given a function call in a string, parse the string and securely execute the function
     def __parse_and_call(self, function_call: str) -> any:
         # Parse the string as Python code
         tree = ast.parse(function_call, mode="eval")
@@ -33,6 +33,9 @@ class FCall:
         return result
     
     def invoke_bedrock_client_and_tools (self,bedrock_client,modelId,request):
+        """
+            Invoke a bedrock client and execute tools, if any
+        """
         docs = self.__get_tools_docs()
         content = request["messages"][len(request["messages"])-1]["content"]
         prompt = f"""

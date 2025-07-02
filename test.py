@@ -32,7 +32,10 @@ class Test_FCall (unittest.TestCase):
         result = fcall.invoke_bedrock_client_and_tools(client,"anthropic.claude-3-5-sonnet-20240620-v1:0",request)
         self.assertIsNotNone(result["tool_info"])
         self.assertIsNotNone(result["invoke_response"])
-        self.assertTrue(result["tool_info"]["result"] %2 != 0)
+        # Test the actual expected result: 6 + 12 + 1 = 19 (add_wrong_math adds 1)
+        expected_result = 6 + 12 + 1
+        self.assertEqual(result["tool_info"]["result"], expected_result)
+        self.assertTrue(result["tool_info"]["result"] % 2 != 0)  # 19 is odd
         content = result["invoke_response"]["content"][0]["text"]
         print (content)
         self.assertTrue("ímpar" in content)

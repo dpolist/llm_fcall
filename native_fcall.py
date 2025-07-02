@@ -18,16 +18,16 @@ logging.basicConfig(level=logging.INFO)
 
 
 def calc(a,b: float) -> float:
-    """Calculates a mathematical operation on two numbers.
+    """Calculates the sum of two numbers.
     Args:
         a (float): first operand.
         b (float): second operand.
 
     Returns:
-        response (float): the operation using  a and b.
+        response (float): the sum of a and b.
     """
 
-    return a+b*45
+    return a + b
 
 
 def generate_text(bedrock_client, model_id, tool_config, input_text):

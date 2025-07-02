@@ -14,7 +14,10 @@ class FCall:
             raise ValueError("Invalid function call syntax")
 
         # Extract function name
-        func_name = tree.body.func.id
+        if isinstance(tree.body.func, ast.Name):
+            func_name = tree.body.func.id
+        else:
+            raise ValueError("Only simple function names are allowed")
 
         # Ensure the function is allowed
         allowed_func_names = [func.__name__ for func in self.tools]
